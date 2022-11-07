@@ -10,8 +10,7 @@ class Person
   attr_reader :id
 
   # Getter and Setter for @name and @age
-  attr_accessor :name
-  attr_accessor	:age
+  attr_accessor :name, :age
 
   # Private method
   private
