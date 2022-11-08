@@ -10,5 +10,4 @@ class Classroom
   def add_student(student)
     @students << student
   end
-
 end

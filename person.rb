@@ -1,7 +1,7 @@
 require './nameable'
 
 class Person < Nameable
-  #Getters
+  # Getters
   attr_reader :id, :rentals
 
   # Getters and Setters combined
