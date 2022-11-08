@@ -67,3 +67,7 @@ Give a ⭐️ if you like this project!
 ## 📝 License
 
 This project is [MIT](./MIT.md) licensed.
+
+## Acknowledgments
+- [Decorator in Ruby Example](https://refactoring.guru/design-patterns/decorator/ruby/example#example-0)
+- [Composition in Ruby Example](https://github.com/microverseinc/curriculum-ruby/blob/main/oop/articles/composition_by_examples.md)
