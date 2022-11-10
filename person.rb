@@ -7,7 +7,7 @@ class Person < Nameable
   # Getters and Setters combined
   attr_accessor :name, :age
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  def initialize(age, name: 'Unknown', parent_permission: true)
     super()
     @id = rand(1..1000)
     @name = name
