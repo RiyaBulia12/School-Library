@@ -32,7 +32,7 @@ def list_rental
 
   @rentals.each do |rental|
     if rental.person.id == person_id
-      puts "Date: #{rental.date} \nBook: #{rental.book.title} \nAuthor: #{rental.book.author}"
+      puts "On #{rental.date}, #{rental.book.title} book is rented by #{rental.person.name}"
       puts '--------------------------------------------------------'
     end
   end
@@ -100,12 +100,10 @@ def create_book
 end
 
 def create_rental
-  puts 'Select a book from the following list by number'
   list_books
   print 'Book Id: '
   book_id = gets.chomp.to_i
 
-  puts 'Select a person from the following list by number (Not ID): '
   list_people
   print 'Person Id: '
   person_id = gets.chomp.to_i
@@ -113,9 +111,19 @@ def create_rental
   print 'Date: '
   date = gets.chomp
 
-  rental = Rental.new(date, @books[book_id], @people[person_id])
+  @b = Object.new
+  @books.each do |book|
+    @b = book if book.id == book_id
+  end
+
+  @p = Object.new
+  @people.each do |person|
+    @p = person if person.id == person_id
+  end
+
+  rental = Rental.new(date, @b, @p)
   @rentals << rental
-  p @rentals
+
   puts "Rental created successfully\n-------------------------------------"
 end
 
