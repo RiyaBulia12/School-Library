@@ -2,12 +2,12 @@ require './nameable'
 
 class Person < Nameable
   # Getters
-  attr_reader :id, :rentals
+  attr_reader :id
 
   # Getters and Setters combined
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :rentals
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  def initialize(age, name: 'Unknown', parent_permission: true)
     super()
     @id = rand(1..1000)
     @name = name
