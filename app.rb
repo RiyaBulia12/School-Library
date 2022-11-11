@@ -33,7 +33,7 @@ def list_rental
   @rentals.each do |rental|
     if rental.person.id == person_id
       puts "Date: #{rental.date} \nBook: #{rental.book.title} \nAuthor: #{rental.book.author}"
-      puts "--------------------------------------------------------"
+      puts '--------------------------------------------------------'
     end
   end
 end
