@@ -28,6 +28,15 @@ class Person < Nameable
     true
   end
 
+  def self.list_people(people)
+    return print puts "--------------------------------------------------------\n No records Found \n--------------------------------------------------------" if people.length.zero?
+    puts "---------------------------- \n List of all people \n----------------------------"
+    people.each do |person|
+      puts "Id: #{person.id}  Name: #{person.name}  Age: #{person.age}"
+    end
+    puts '--------------------------------------------------------'
+  end
+
   def correct_name
     @name
   end

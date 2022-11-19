@@ -4,24 +4,6 @@ require './student'
 require './teacher'
 require './person'
 
-def list_books
-  puts "---------------------------- \n List of all books \n----------------------------"
-  puts " No books added  \n--------------------------------------------------------" if @books.length.zero?
-  @books.each do |book|
-    puts "Id: #{book.id}  Title: #{book.title}  Author: #{book.author}"
-  end
-  puts '--------------------------------------------------------'
-end
-
-def list_people
-  puts "---------------------------- \n List of all people \n----------------------------"
-  puts " Data is empty \n--------------------------------------------------------" if @people.length.zero?
-  @people.each do |person|
-    puts "Id: #{person.id}  Name: #{person.name}  Age: #{person.age}"
-  end
-  puts '--------------------------------------------------------'
-end
-
 def list_rental
   puts "---------------------------- \n List of all rentals of a person\n----------------------------"
   if @rentals.length.zero?
@@ -36,67 +18,6 @@ def list_rental
       puts '--------------------------------------------------------'
     end
   end
-end
-
-def create_person
-  puts "---------------------------- \n Do you want to create a \n1. Student or \n2. Teacher"
-  option = gets.chomp.to_i
-
-  case option
-  when 1
-    create_student
-  when 2
-    create_teacher
-  else
-    puts 'Invalid choice'
-  end
-end
-
-def create_student
-  print 'Age: '
-  age = gets.chomp
-  print 'Name: '
-  name = gets.chomp
-  print 'Has parent permission? [Y/N]: '
-  parent_permission = gets.chomp
-  parent_permission.upcase!
-
-  case parent_permission
-  when 'Y'
-    parent_permission = true
-  when 'N'
-    parent_permission = false
-  else
-    print 'Enter either Y or N only'
-  end
-
-  student = Student.new(age, name: name, parent_permission: parent_permission)
-  @people << student
-  puts "Student created successfully\n-------------------------------------"
-end
-
-def create_teacher
-  print 'Age: '
-  age = gets.chomp
-  print 'Name: '
-  name = gets.chomp
-  print 'Specialization: '
-  specialization = gets.chomp
-
-  teacher = Teacher.new(specialization, age, name: name)
-  @people << teacher
-  puts "Teacher created successfully\n-------------------------------------"
-end
-
-def create_book
-  print 'Title: '
-  title = gets.chomp
-  print 'Author: '
-  author = gets.chomp
-
-  book = Book.new(title, author)
-  @books << book
-  puts "Book created successfully\n-------------------------------------"
 end
 
 def create_rental
@@ -128,33 +49,42 @@ def create_rental
 end
 
 class App
-  @books = []
-  @people = []
-  @rentals = []
 
-  puts "Welcome to OOP School Library App!\n"
-  loop do
-    puts 'Please choose an option by entering a number:'
-    puts '1. List all books'
-    puts '2. List all people'
-    puts '3. Create a person'
-    puts '4. Create a book'
-    puts '5. Create a rental'
-    puts '6. List all rentals for a given person id'
-    puts '7. Exit'
+  attr_reader :books, :people, :rentals
 
+  def initialize
+    @books = []
+    @people = []
+    @rentals = []
+  end
+
+  def create_person
+    puts "---------------------------- \n Do you want to create a \n1. Student or \n2. Teacher"
+    option = gets.chomp.to_i
+
+    case option
+    when 1
+      Student.create_student(@people)
+    when 2
+      Teacher.create_teacher(@people)
+    else
+      puts 'Invalid choice'
+    end
+  end
+
+  def user_choice
     puts 'Enter your choice: '
     choice = gets.chomp.to_i
 
     case choice
     when 1
-      list_books
+      Book.list_books(@books)
     when 2
-      list_people
+      Person.list_people(@people)
     when 3
       create_person
     when 4
-      create_book
+      Book.create_book(@books)
     when 5
       create_rental
     when 6
