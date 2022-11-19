@@ -4,50 +4,6 @@ require './student'
 require './teacher'
 require './person'
 
-def list_rental
-  puts "---------------------------- \n List of all rentals of a person\n----------------------------"
-  if @rentals.length.zero?
-    puts " Person did not rent any book  \n--------------------------------------------------------"
-  end
-  puts ' Enter Id of a person'
-  person_id = gets.chomp.to_i
-
-  @rentals.each do |rental|
-    if rental.person.id == person_id
-      puts "On #{rental.date}, #{rental.book.title} book is rented by #{rental.person.name}"
-      puts '--------------------------------------------------------'
-    end
-  end
-end
-
-def create_rental
-  list_books
-  print 'Book Id: '
-  book_id = gets.chomp.to_i
-
-  list_people
-  print 'Person Id: '
-  person_id = gets.chomp.to_i
-
-  print 'Date: '
-  date = gets.chomp
-
-  @b = Object.new
-  @books.each do |book|
-    @b = book if book.id == book_id
-  end
-
-  @p = Object.new
-  @people.each do |person|
-    @p = person if person.id == person_id
-  end
-
-  rental = Rental.new(date, @b, @p)
-  @rentals << rental
-
-  puts "Rental created successfully\n-------------------------------------"
-end
-
 class App
 
   attr_reader :books, :people, :rentals
@@ -72,6 +28,26 @@ class App
     end
   end
 
+  def list_rental_book_person
+    puts "---------------------------- \n Do you want to list rental details by a \n1. Person Id or \n2. Book Id"
+    option = gets.chomp.to_i
+
+    case option
+    when 1
+      Person.list_rental_by_person_id(@people, @rentals)
+    when 2
+      Book.list_rental_by_book_id(@book, @rentals)
+    else
+      puts 'Invalid choice'
+    end
+  end
+
+  def add_rental
+    rental =  Rental.create_rental(@books, @people)
+    @rentals << rental
+    puts "Rental created successfully\n-------------------------------------"
+  end
+
   def user_choice
     puts 'Enter your choice: '
     choice = gets.chomp.to_i
@@ -86,9 +62,9 @@ class App
     when 4
       Book.create_book(@books)
     when 5
-      create_rental
+      add_rental
     when 6
-      list_rental
+      list_rental_book_person
     when 7
       exit
     else
