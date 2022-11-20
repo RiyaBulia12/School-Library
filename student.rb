@@ -10,6 +10,28 @@ class Student < Person
     @classroom = nil
   end
 
+  def self.create_student(people)
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp
+    parent_permission.upcase!
+
+    case parent_permission
+    when 'Y'
+      parent_permission = true
+    when 'N'
+      parent_permission = false
+    else
+      print 'Enter either Y or N only'
+    end
+
+    people << new(age, name: name, parent_permission: parent_permission)
+    puts "Student created successfully\n-------------------------------------"
+  end
+
   def play_hooky
     '¯(ツ)/¯'
   end
