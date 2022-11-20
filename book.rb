@@ -27,9 +27,7 @@ class Book
   end
 
   def self.list_books(books)
-    if books.length.zero?
-      return print "---------------------------- \n No books added  \n----------------------------"
-    end
+    return print "---------------------------- \n No books added  \n----------------------------" if books.length.zero?
 
     puts "---------------------------- \n List of all books \n----------------------------"
 

@@ -30,6 +30,6 @@ class Rental
     else
       puts "No rental created\n-------------------------------------"
     end
-    return rental
+    rental
   end
 end
