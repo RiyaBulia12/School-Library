@@ -28,7 +28,7 @@ class Student < Person
       print 'Enter either Y or N only'
     end
 
-    people << new(age, name: name, parent_permission:)
+    people << new(age, name: name, parent_permission: parent_permission)
     puts "Student created successfully\n-------------------------------------"
   end
 
