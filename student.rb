@@ -6,7 +6,7 @@ class Student < Person
 
   # extends parent's constructor by adding @classroom and a parameter for it
   def initialize(age, name: 'Unknown', parent_permission: true)
-    super(age, name: name, parent_permission: parent_permission)
+    super(age, name:, parent_permission:)
     @classroom = nil
   end
 
@@ -28,7 +28,7 @@ class Student < Person
       print 'Enter either Y or N only'
     end
 
-    people << new(age, name: name, parent_permission: parent_permission)
+    people << new(age, name:, parent_permission:)
     puts "Student created successfully\n-------------------------------------"
   end
 

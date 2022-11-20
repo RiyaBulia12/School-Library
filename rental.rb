@@ -7,6 +7,7 @@ class Rental
   def initialize(date, book, person)
     @date = date
     @book = book
+    book.rentals << self
     @person = person
     person.rentals << self
   end
@@ -24,12 +25,11 @@ class Rental
       print 'Date: '
       date = gets.chomp
 
-      Rental.new(date, books[book_id], people[person_id]) if books[book_id] != nil|| people[person_id] != nil
+      rental = Rental.new(date, books[book_id], people[person_id])
       puts "Rental created successfully\n-------------------------------------"
     else
       puts "No rental created\n-------------------------------------"
     end
-
+    return rental
   end
-
 end

@@ -8,17 +8,17 @@ class Book
     @rentals = []
   end
 
-
   def self.list_rental_by_book_id(books, rentals)
-    return puts "---------------------------- \n  No rentals record \n----------------------------" if rentals.length.zero?
+    if rentals.length.zero?
+      return puts "---------------------------- \n  No rentals record \n----------------------------"
+    end
+
     list_books(books)
-    puts ' Enter Id of a book'
+    print 'Enter Id of a book: '
     book_id = gets.chomp.to_i
 
-    p rentals
     puts "---------------------------- \n List of all rentals \n----------------------------"
     rentals.map do |rental|
-      p rental
       if rental.book.id == book_id
         puts "On #{rental.date}, #{rental.book.title} book is rented by #{rental.person.name}"
         puts '--------------------------------------------------------'
@@ -27,7 +27,10 @@ class Book
   end
 
   def self.list_books(books)
-    return print "-------------------------------------------------------- \n No books added  \n--------------------------------------------------------" if books.empty?
+    if books.length.zero?
+      return print "---------------------------- \n No books added  \n----------------------------"
+    end
+
     puts "---------------------------- \n List of all books \n----------------------------"
 
     books.each do |book|

@@ -4,7 +4,7 @@ require './person'
 class Teacher < Person
   # extends person constructor and @specialization
   def initialize(specialization, age, name: 'Unknown', parent_permission: true)
-    super(age, name: name, parent_permission: parent_permission)
+    super(age, name:, parent_permission:)
     @specialization = specialization
   end
 
@@ -16,7 +16,7 @@ class Teacher < Person
     print 'Specialization: '
     specialization = gets.chomp
 
-    teacher = Teacher.new(specialization, age, name: name)
+    teacher = Teacher.new(specialization, age, name:)
     people << teacher
     puts "Teacher created successfully\n-------------------------------------"
   end

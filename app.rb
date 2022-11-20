@@ -5,7 +5,6 @@ require './teacher'
 require './person'
 
 class App
-
   attr_reader :books, :people, :rentals
 
   def initialize
@@ -24,7 +23,7 @@ class App
     when 2
       Teacher.create_teacher(@people)
     else
-      puts 'Invalid choice'
+      print 'Invalid choice'
     end
   end
 
@@ -36,21 +35,13 @@ class App
     when 1
       Person.list_rental_by_person_id(@people, @rentals)
     when 2
-      Book.list_rental_by_book_id(@book, @rentals)
+      Book.list_rental_by_book_id(@books, @rentals)
     else
-      puts 'Invalid choice'
+      print 'Invalid choice'
     end
   end
 
-  def add_rental
-    rental =  Rental.create_rental(@books, @people)
-    @rentals << rental
-  end
-
-  def user_choice
-    puts 'Enter your choice: '
-    choice = gets.chomp.to_i
-
+  def user_choice(choice)
     case choice
     when 1
       Book.list_books(@books)
@@ -61,11 +52,9 @@ class App
     when 4
       Book.create_book(@books)
     when 5
-      add_rental
+      @rentals << Rental.create_rental(@books, @people)
     when 6
       list_rental_book_person
-    when 7
-      exit
     else
       puts 'Invalid choice'
     end
