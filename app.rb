@@ -45,7 +45,6 @@ class App
   def add_rental
     rental =  Rental.create_rental(@books, @people)
     @rentals << rental
-    puts "Rental created successfully\n-------------------------------------"
   end
 
   def user_choice

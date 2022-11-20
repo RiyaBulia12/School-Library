@@ -1,11 +1,8 @@
 require './nameable'
 
 class Person < Nameable
-  # Getters
-  attr_reader :id
-
   # Getters and Setters combined
-  attr_accessor :name, :age, :rentals
+  attr_accessor :id, :name, :age, :rentals
 
   def initialize(age, name: 'Unknown', parent_permission: true)
     super()
@@ -29,28 +26,26 @@ class Person < Nameable
   end
 
 
-  # def self.list_rental(rentals, people)
-  #   return puts "---------------------------- \n Person did not rent any book \n----------------------------" if rentals.length.zero?
-  #   Person.list_people(people)
-  #   puts ' Enter Id of a person'
-  #   person_id = gets.chomp.to_i
+  def self.list_rental_by_person_id(people, rentals)
+    return puts "---------------------------- \n Person did not rent any book \n----------------------------" if rentals.length.zero?
+    list_people(people)
+    puts ' Enter Id of a person'
+    person_id = gets.to_i
 
-  #   p rentals
-  #   puts "---------------------------- \n List of all rentals \n----------------------------"
-  #   rentals.each do |rental|
-  #     p rental
-  #     if rental.person.id == person_id
-  #       puts "On #{rental.date}, #{rental.book.title} book is rented by #{rental.person.name}"
-  #       puts '--------------------------------------------------------'
-  #     end
-  #   end
-  # end
+    puts "---------------------------- \n List of all rentals \n----------------------------"
+    rentals.each do |rental|
+      if rental.person.id == person_id
+        puts "On #{rental.date}, #{rental.book.title} book is rented by #{rental.person.name}"
+        puts '--------------------------------------------------------'
+      end
+    end
+  end
 
   def self.list_people(people)
-    return print puts "--------------------------------------------------------\n No records Found \n--------------------------------------------------------" if people.length.zero?
+    return print puts "--------------------------------------------------------\n No person record found \n--------------------------------------------------------" if people.length.zero?
     puts "---------------------------- \n List of all people \n----------------------------"
     people.each do |person|
-      puts "Id: #{person.id}  Name: #{person.name}  Age: #{person.age}"
+      puts "Index: #{people.find_index(person)}  Id: #{person.id}  Name: #{person.name}  Age: #{person.age}"
     end
     puts '--------------------------------------------------------'
   end

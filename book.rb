@@ -1,6 +1,5 @@
 class Book
-  attr_accessor :title, :author, :rentals
-  attr_reader :id
+  attr_accessor :id, :title, :author, :rentals
 
   def initialize(title, author)
     @id = rand(1..1000)
@@ -32,7 +31,7 @@ class Book
     puts "---------------------------- \n List of all books \n----------------------------"
 
     books.each do |book|
-      puts "Id: #{book.id}  Title: #{book.title}  Author: #{book.author}"
+      puts "Index: #{books.find_index(book)}  Id: #{book.id} Title: #{book.title}  Author: #{book.author}"
     end
     puts '--------------------------------------------------------'
   end
